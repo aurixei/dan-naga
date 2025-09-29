@@ -18,3 +18,30 @@ hookAnchor('.nav-links a[href="#contact"]', '#contact');
 
 // (Already handled by HTML target) Posts goes to GitHub in new tab.
 // Brand already links to GitHub via <a href>.
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Scroll-spy to highlight current section link
+const sections = ['#home', '#skills', '#projects', '#about', '#contact']
+  .map(s => document.querySelector(s))
+  .filter(Boolean);
+
+const linkMap = new Map(
+  Array.from(document.querySelectorAll('.nav-links a'))
+    .filter(a => a.hash)
+    .map(a => [a.hash, a])
+);
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const hash = `#${entry.target.id}`;
+    const link = linkMap.get(hash);
+    if (!link) return;
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+
+sections.forEach(sec => obs.observe(sec));
