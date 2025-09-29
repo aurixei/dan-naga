@@ -132,11 +132,19 @@ section { scroll-margin-top: 88px; } /* avoid being hidden by sticky nav */
 .bullets { margin: 0 0 10px; padding-left: 18px; }
 .bullets li { margin: 6px 0; }
 .about-panel {
-  min-height: 160px;
   border-radius: 16px;
+  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  background: linear-gradient(180deg, #2a3448, #3b4761);
+  background: rgba(255,255,255,0.05); /* subtle transparent backdrop */
   border: 1px solid rgba(255,255,255,.06);
+  min-height: 600px;  /* match iframe height */
+}
+
+.about-panel iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ============ Contact ============ */
@@ -146,3 +154,4 @@ section { scroll-margin-top: 88px; } /* avoid being hidden by sticky nav */
 @media (min-width: 1400px) {
   .container { padding-left: 32px; padding-right: 32px; }
 }
+
