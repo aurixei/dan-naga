@@ -137,7 +137,7 @@ section { scroll-margin-top: 88px; } /* avoid being hidden by sticky nav */
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   background: rgba(255,255,255,0.05); /* subtle transparent backdrop */
   border: 1px solid rgba(255,255,255,.06);
-  min-height: 600px;  /* match iframe height */
+  min-height: 300px;  /* match iframe height */
 }
 
 .about-panel iframe {
@@ -154,4 +154,5 @@ section { scroll-margin-top: 88px; } /* avoid being hidden by sticky nav */
 @media (min-width: 1400px) {
   .container { padding-left: 32px; padding-right: 32px; }
 }
+
 
