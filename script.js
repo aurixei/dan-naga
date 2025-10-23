@@ -1,9 +1,7 @@
-// Keep HOME / ABOUT ME / CONTACT links smooth and precise
 function hookAnchor(selector, id) {
   const a = document.querySelector(selector);
   if (!a) return;
   a.addEventListener('click', (e) => {
-    // let native hash change work too, but smooth scroll first
     e.preventDefault();
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -11,17 +9,12 @@ function hookAnchor(selector, id) {
   });
 }
 
-// Attach
 hookAnchor('.nav-links a[href="#home"]',    '#home');
 hookAnchor('.nav-links a[href="#about"]',   '#about');
 hookAnchor('.nav-links a[href="#contact"]', '#contact');
 
-// (Already handled by HTML target) Posts goes to GitHub in new tab.
-// Brand already links to GitHub via <a href>.
-// Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Scroll-spy to highlight current section link
 const sections = ['#home', '#skills', '#projects', '#about', '#contact']
   .map(s => document.querySelector(s))
   .filter(Boolean);
@@ -45,3 +38,24 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 sections.forEach(sec => obs.observe(sec));
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("copyEmailBtn");
+  const msg = document.getElementById("copiedMsg");
+  const email = "mariannesoedu@gmail.com";
+
+  if (!btn) return;
+
+  btn.addEventListener("click", (e) => {
+    navigator.clipboard.writeText(email).then(() => {
+      if (msg) msg.style.display = "inline";
+      btn.textContent = "Copied!";
+      setTimeout(() => {
+        if (msg) msg.style.display = "none";
+        btn.textContent = "Email";
+      }, 1500);
+    }).catch(err => {
+      console.error("Clipboard error:", err);
+    });
+  });
+});
