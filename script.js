@@ -39,21 +39,17 @@ const obs = new IntersectionObserver((entries) => {
 
 sections.forEach(sec => obs.observe(sec));
 
+//copy email
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("copyEmailBtn");
-  const msg = document.getElementById("copiedMsg");
-  const email = "mariannesoedu@gmail.com";
+  const email = "marianneadelinee@gmail.com";
 
   if (!btn) return;
 
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", () => {
     navigator.clipboard.writeText(email).then(() => {
-      if (msg) msg.style.display = "inline";
       btn.textContent = "Copied!";
-      setTimeout(() => {
-        if (msg) msg.style.display = "none";
-        btn.textContent = "Email";
-      }, 1500);
+      setTimeout(() => btn.textContent = "Email", 1500);
     }).catch(err => {
       console.error("Clipboard error:", err);
     });
